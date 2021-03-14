@@ -1,6 +1,7 @@
 import unittest
 import rover
 import grid
+import location
 
 class RoverShould(unittest.TestCase):
 
@@ -106,3 +107,18 @@ class RoverShould(unittest.TestCase):
         self._grid = grid.Grid(list())
         self._rover = rover.Rover(self._grid)
         self.assertEqual(self._rover.execute("MRRM", 2), "0:0:S")
+    
+    def test_stopAndReportObstacleWhenMovesEast(self):
+        self._grid = grid.Grid([location.Location(2, 0)])
+        self._rover = rover.Rover(self._grid)
+        self.assertEqual(self._rover.execute("RMMMMMM", 1), "O:2:0:E")
+
+    def test_stopAndReportObstacleWhenMovesEastAndStepIsGreaterThanCoordinate(self):
+        self._grid = grid.Grid([location.Location(2, 0)])
+        self._rover = rover.Rover(self._grid)
+        self.assertEqual(self._rover.execute("RMMMMMM", 4), "O:2:0:E")
+
+    def test_stopAndReportObstacleWhenMovesSouth(self):
+        self._grid = grid.Grid([location.Location(0, 8)])
+        self._rover = rover.Rover(self._grid)
+        self.assertEqual(self._rover.execute("MRRMMMM", 2), "O:0:8:S")
