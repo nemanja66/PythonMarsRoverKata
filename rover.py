@@ -1,25 +1,26 @@
-import coordinates
+import location
 import northDirection
 
 class Rover():
-    def __init__(self):
-        self._coordinates = coordinates.Coordinates(1,1)
+    def __init__(self, grid):
+        self._location = location.Location(1,1)
         self.direction = northDirection.NorthDirection(self)
+        self._grid = grid
 
     def execute(self, commands):
         if not commands:
-            return self.formatOutput(self._coordinates, self.direction)
+            return self.formatOutput(self._location, self.direction)
 
         self.commandList = list(commands)
 
         for c in self.commandList:
-            if c == 'R': 
+            if c == 'M': 
+                self._location = self._grid.nextLocationFor(self._location, self.direction, 1)
+            elif c == 'R' or c == 'L':
                 self.direction.rotate(c)
-            elif c == 'M': 
-                self._coordinates.y = self._coordinates.y + 1
 
-        return self.formatOutput(self._coordinates, self.direction)
+        return self.formatOutput(self._location, self.direction)
 
-    def formatOutput(self, coordinates, direction):
-        return str(coordinates.x) + ":" + str(coordinates.y) + ":" + direction.symbol()
+    def formatOutput(self, location, direction):
+        return str(location.x) + ":" + str(location.y) + ":" + direction.symbol()
         
