@@ -3,7 +3,7 @@ import northDirection
 
 class Rover():
     def __init__(self, grid):
-        self._location = location.Location(1,1)
+        self._location = location.Location(0,0)
         self.direction = northDirection.NorthDirection(self)
         self._grid = grid
 
