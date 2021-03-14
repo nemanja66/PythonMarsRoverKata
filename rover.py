@@ -7,7 +7,7 @@ class Rover():
         self.direction = northDirection.NorthDirection(self)
         self._grid = grid
 
-    def execute(self, commands):
+    def execute(self, commands, step):
         if not commands:
             return self.formatOutput(self._location, self.direction)
 
@@ -15,7 +15,7 @@ class Rover():
 
         for c in self.commandList:
             if c == 'M': 
-                self._location = self._grid.nextLocationFor(self._location, self.direction, 1)
+                self._location = self._grid.nextLocationFor(self._location, self.direction, step)
             elif c == 'R' or c == 'L':
                 self.direction.rotate(c)
 

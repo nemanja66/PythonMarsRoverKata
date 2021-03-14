@@ -10,8 +10,10 @@ class Grid():
         if direction.symbol() == "N":
             return location.Location(inputLocation.x, (inputLocation.y + step) % self.northEdge)
         elif direction.symbol() == "S":
-            return location.Location(inputLocation.x, if inputLocation.y > step: inputLocation.y - step else: self.northEdge - (step - inputLocation.y))
+            y = inputLocation.y - step if inputLocation.y >= step else self.northEdge - (step - inputLocation.y)
+            return location.Location(inputLocation.x, y)
         elif direction.symbol() == "E":
             return location.Location((inputLocation.x + step) % self.westEdge, inputLocation.y)
         elif direction.symbol() == "W":
-            return location.Location(inputLocation.x > step: inputLocation.x - step else: self.westEdge - (step - inputLocation.x), inputLocation.y)
+            x = inputLocation.x - step if inputLocation.x >= step else self.westEdge - (step - inputLocation.x)
+            return location.Location(x, inputLocation.y)
