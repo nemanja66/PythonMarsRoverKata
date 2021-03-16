@@ -1,10 +1,10 @@
 class EastDirection():
     def __init__(self, rover):
-        self._rover = rover
+        self.rover = rover
 
     def rotate(self, side):
-        if side == 'L': self._rover.direction = NorthDirection(self._rover)
-        elif side == 'R': self._rover.direction = SouthDirection(self._rover)
+        if side == 'L': self.rover.direction = NorthDirection(self.rover)
+        elif side == 'R': self.rover.direction = SouthDirection(self.rover)
 
     @property
     def symbol(self): 
@@ -12,11 +12,11 @@ class EastDirection():
 
 class NorthDirection():
     def __init__(self, rover):
-        self._rover = rover
+        self.rover = rover
 
     def rotate(self, side):
-        if side == 'L': self._rover.direction = WestDirection(self._rover)
-        elif side == 'R': self._rover.direction = EastDirection(self._rover)
+        if side == 'L': self.rover.direction = WestDirection(self.rover)
+        elif side == 'R': self.rover.direction = EastDirection(self.rover)
 
     @property
     def symbol(self): 
@@ -24,11 +24,11 @@ class NorthDirection():
 
 class SouthDirection():
     def __init__(self, rover):
-        self._rover = rover
+        self.rover = rover
 
     def rotate(self, side):
-        if side == 'L': self._rover.direction = EastDirection(self._rover)
-        elif side == 'R': self._rover.direction = WestDirection(self._rover)
+        if side == 'L': self.rover.direction = EastDirection(self.rover)
+        elif side == 'R': self.rover.direction = WestDirection(self.rover)
 
     @property
     def symbol(self): 
@@ -36,11 +36,11 @@ class SouthDirection():
 
 class WestDirection():
     def __init__(self, rover):
-        self._rover = rover
+        self.rover = rover
 
     def rotate(self, side):
-        if side == 'L': self._rover.direction = SouthDirection(self._rover)
-        elif side == 'R': self._rover.direction = NorthDirection(self._rover)
+        if side == 'L': self.rover.direction = SouthDirection(self.rover)
+        elif side == 'R': self.rover.direction = NorthDirection(self.rover)
 
     @property
     def symbol(self): 

@@ -4,26 +4,27 @@ from option import Result, Ok, Err
 
 class Rover():
     def __init__(self, grid):
-        self._location = location.Location(0,0)
+        self.location = location.Location(0,0)
         self.direction = NorthDirection(self)
-        self._grid = grid
+        self.grid = grid
 
     def execute(self, commands, step):
         if not commands:
-            return self.formatOutput(self._location, self.direction)
+            return self.format_output(self.location, self.direction)
 
         for c in commands:
             if c == 'M': 
-                resultLocation = self._grid.nextLocationFor(self._location, self.direction, step)
-                if resultLocation.is_err:
-                    return "O:" + self.formatOutput(resultLocation.unwrap_err(), self.direction)
+                result_location = self.grid.next_location_for(self.location, self.direction, step)
+                if result_location.is_err:
+                    return "O:" + self.format_output(result_location.unwrap_err(), self.direction)
                 else: 
-                    self._location = resultLocation.unwrap()
+                    self.location = result_location.unwrap()
             elif c in ['R', 'L']:
                 self.direction.rotate(c)
 
-        return self.formatOutput(self._location, self.direction)
+        return self.format_output(self.location, self.direction)
 
-    def formatOutput(self, location, direction):
-        return str(location.x) + ":" + str(location.y) + ":" + direction.symbol
+    def format_output(self, location, direction):
+        return f'{location.x}:{location.y}:{direction.symbol}'
+        
         
