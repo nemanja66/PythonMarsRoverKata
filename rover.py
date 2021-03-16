@@ -12,20 +12,18 @@ class Rover():
         if not commands:
             return self.formatOutput(self._location, self.direction)
 
-        self.commandList = list(commands)
-
-        for c in self.commandList:
+        for c in commands:
             if c == 'M': 
                 resultLocation = self._grid.nextLocationFor(self._location, self.direction, step)
                 if resultLocation.is_err:
                     return "O:" + self.formatOutput(resultLocation.unwrap_err(), self.direction)
                 else: 
                     self._location = resultLocation.unwrap()
-            elif c == 'R' or c == 'L':
+            elif c in ['R', 'L']:
                 self.direction.rotate(c)
 
         return self.formatOutput(self._location, self.direction)
 
     def formatOutput(self, location, direction):
-        return str(location.x) + ":" + str(location.y) + ":" + direction.symbol()
+        return str(location.x) + ":" + str(location.y) + ":" + direction.symbol
         
